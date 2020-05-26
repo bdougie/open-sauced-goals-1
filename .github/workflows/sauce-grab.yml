@@ -18,7 +18,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           const response = await octokit.paginate(
-            octokit.issues.listForRepo.endpoint.merge({
+            github.issues.listForRepo.endpoint.merge({
               ...github.context.repo
             })
           );
