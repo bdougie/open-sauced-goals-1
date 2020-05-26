@@ -1,6 +1,7 @@
 name: foo
 on: 
- issues: ["labeled", "unlabeled"]
+  issues: ["labeled", "unlabeled"]
+  
 jobs:
   build:
     name: Build
