@@ -24,11 +24,9 @@ jobs:
               ...context.repo
             })
           );
-          const fileHandle = await fs.open("issues.json", 'w');
-          await fileHandle.writeFileSync(fileHandle, JSON.stringify(response), (e) => {
+          fs.writeFileSync("data.json", JSON.stringify(response), (e) => {
             if(err) { console.error(`[FAIL] ${err}`); 
           });
-          await fileHandle.close();
     - uses: peter-evans/create-pull-request@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
