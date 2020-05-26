@@ -1,5 +1,6 @@
 name: foo
-on: 
+
+on:
   issues: ["labeled", "unlabeled"]
   
 jobs:
