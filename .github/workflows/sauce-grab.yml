@@ -24,9 +24,7 @@ jobs:
               ...context.repo
             })
           );
-          fs.writeFileSync("data.json", JSON.stringify(response), (e) => {
-            if(err) { console.error(`[FAIL] ${err}`); 
-          });
+          fs.writeFileSync("data.json", JSON.stringify(response));
     - uses: peter-evans/create-pull-request@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
