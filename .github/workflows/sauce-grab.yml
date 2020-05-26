@@ -1,3 +1,37 @@
 name: foo
 on: 
  issues: ["labeled", "unlabeled"]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Build
+      run: npm install
+    - name: Fetch issues
+      uses: actions/github-script@v1
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const response = await octokit.paginate(
+            octokit.issues.listForRepo.endpoint.merge({
+              ...github.context.repo
+            })
+          );
+          const fileHandle = await fs.open("issues.json", 'w');
+          await fileHandle.writeFile(JSON.stringify(response));
+          await fileHandle.close();
+    - uses: peter-evans/create-pull-request@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "chore: gen issues"
+        title: "chore: gen issues"
+        body: |
+          JSONify issues
+        branch: gen-issues
+        branch-suffix: timestamp
+        labels: automerge
+    - uses: mikeal/publish-to-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub sets this for you
