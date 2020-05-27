@@ -23,9 +23,10 @@ jobs:
             github.issues.listForRepo.endpoint.merge({
               ...context.repo
             })
-            console.log(response)
           );
-          fs.writeFileSync(`data.json`, JSON.stringify(response));
+          response.forEach((issue) => {
+            fs.writeFileSync(`${issue.title}/data.json`, JSON.stringify(response));
+          }
     - name: Set up Git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
