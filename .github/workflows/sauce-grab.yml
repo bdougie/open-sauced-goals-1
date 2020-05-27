@@ -25,7 +25,7 @@ jobs:
             })
           );
           response.forEach((issue) => {
-            fs.writeFileSync(`${issue.title}/data.json`, JSON.stringify(response));
+            fs.writeFileSync(`data/${issue.title}/data.json`, JSON.stringify(response));
           }
     - name: Set up Git
       env:
