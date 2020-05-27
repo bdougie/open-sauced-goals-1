@@ -1,4 +1,4 @@
-name: foo
+name: push issues data to goals
 
 on:
   issues: 
@@ -24,7 +24,7 @@ jobs:
               ...context.repo
             })
           );
-          fs.writeFileSync("data.json", JSON.stringify(response));
+          fs.writeFileSync(`${context.repo.full_name}/data.json`, JSON.stringify(response));
     - name: Set up Git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
