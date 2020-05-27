@@ -17,6 +17,8 @@ jobs:
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
+          const dataFolder = '/data/';
+          const pathName = (title) => path.join(__dirname, dataFolder, title) + '.json';
           const fs = require("fs");
           
           const response = await github.paginate(
@@ -25,7 +27,7 @@ jobs:
             })
           );
           response.forEach((issue) => {
-            fs.writeFileSync(`./data/${issue.title}/data.json`, JSON.stringify(response));
+            fs.writeFileSync(`pathName, JSON.stringify(response));
           })
     - name: Set up Git
       env:
