@@ -26,7 +26,7 @@ jobs:
           );
           response.forEach((issue) => {
             fs.writeFileSync(`data/${issue.title}/data.json`, JSON.stringify(response));
-          }
+          })
     - name: Set up Git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
