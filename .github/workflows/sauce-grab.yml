@@ -18,7 +18,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           const dataFolder = '/data/';
-          const pathName = (title) => (path.join(__dirname, dataFolder, title) + '.json');
+          const pathName = (title) => {path.join(__dirname, dataFolder, title) + '.json'};
           const fs = require("fs");
           
           const response = await github.paginate(
