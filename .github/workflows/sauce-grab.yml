@@ -1,3 +1,4 @@
+  
 name: push issues data to goals
 
 on:
@@ -17,18 +18,16 @@ jobs:
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
-          const dataFolder = '/data/';
-          const pathName = (title) => {path.join(__dirname, dataFolder, title) + '.json'};
           const fs = require("fs");
           
+          console.log(context.repo)
           const response = await github.paginate(
             github.issues.listForRepo.endpoint.merge({
               ...context.repo
             })
           );
-          response.forEach((issue) => {
-            fs.writeFileSync(`pathName, JSON.stringify(response));
-          })
+          
+          // run through responses and print stars repo to json or issue. 
     - name: Set up Git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
